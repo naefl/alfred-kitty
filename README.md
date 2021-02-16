@@ -49,3 +49,6 @@ PRs welcome! This is very early and I've been using it for a few days only
 ## Dependencies
 
 - visidata
+- awk
+- jq
+- kitty
