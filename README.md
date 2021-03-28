@@ -12,6 +12,7 @@ with the following changes:
     - open selected directory in kitty in new tab
     - open selected file in neovim
     - open selected file in visidata (https://github.com/saulpw/visidata)
+    - send selected file via airdrop (requires [hammerspoon](https://hammerspoon.org))
 - Switch tabs, ![see here](./switch_tabs.png)
     - Allows tabs with identical names, and allows switching between the different tabs with identical names (the original would always switch to the first tab)
     - Expose more information
@@ -30,6 +31,19 @@ PRs welcome! This is very early and I've been using it for a few days only
 - install this workflow by clicking on the kitty.alfredworkflow
 - change the many paths in the workflow to point to your executables (i've compiled both neovim and kitty from source so this will be different for you!) [see here](./change_paths.png)
 - If you want to replace neovim with another terminal editor (emacs, vim, ...) change the respective binary
+- To get the airdrop workflow working put the following into your `init.lua`
+    ```lua
+    hs.urlevent.bind("airdrop", function(eventName, params)
+        print(hs.inspect.inspect(params))
+
+        local file = params["f"]
+        local url = hs.sharing.fileURL(file)
+        local ad = hs.sharing.builtinSharingServices.sendViaAirDrop
+        local s = hs.sharing.newShare(ad)
+        s:shareItems({url})
+    end)
+    ```
+
 
 
 ## Shortcuts
