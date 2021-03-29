@@ -33,6 +33,18 @@ PRs welcome! This is very early and I've been using it for a few days only
 - If you want to replace neovim with another terminal editor (emacs, vim, ...) change the respective binary
 - To get the airdrop workflow working put the following into your `init.lua`
     ```lua
+
+    -- url encoding
+    local hex_to_char = function(x)
+      return string.char(tonumber(x, 16))
+    end
+
+    -- url encoding
+    local unescape = function(url)
+      return url:gsub("%%(%x%x)", hex_to_char)
+    end
+
+
     hs.urlevent.bind("airdrop", function(eventName, params)
         print(hs.inspect.inspect(params))
 
